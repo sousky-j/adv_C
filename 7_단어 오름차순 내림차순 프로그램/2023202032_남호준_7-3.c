@@ -2,32 +2,40 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#pragma warning (disable: 6031)
+#pragma warning(disable : 6031)
 
-void sort_Ascending(char** B);
-void sort_Descending(char** B);
-void write_result_to_file(char** B, FILE* wfp);
-void print_arr(char* arr[20]);
+void sort_Ascending(char **B);
+void sort_Descending(char **B);
+void write_result_to_file(char **B, FILE *wfp);
+void print_arr(char *arr[20]);
 
 void main()
 {
-    FILE* rfp;
-    FILE* wfp;
-    FILE* wfp2;
-    char imsi[100] = { NULL, };
-    char* A[4] = { NULL, };
-    char* B[20] = { NULL, };
-    char dan[20] = { NULL, };
+    FILE *rfp;
+    FILE *wfp;
+    FILE *wfp2;
+    char imsi[100] = {
+        NULL,
+    };
+    char *A[4] = {
+        NULL,
+    };
+    char *B[20] = {
+        NULL,
+    };
+    char dan[20] = {
+        NULL,
+    };
     int len, each = 0, tmp = 0;
-    rfp = fopen("C:\\Users\\hojun\\OneDrive\\바탕 화면\\새 폴더\\data.txt", "r");
-    wfp = fopen("C:\\Users\\hojun\\OneDrive\\바탕 화면\\새 폴더\\output3.txt", "w");
-    wfp2 = fopen("C:\\Users\\hojun\\OneDrive\\바탕 화면\\새 폴더\\output4.txt", "w");
+    rfp = fopen("C:\\Users\\data.txt", "r");
+    wfp = fopen("C:\\Users\\output3.txt", "w");
+    wfp2 = fopen("C:\\Users\\output4.txt", "w");
 
     for (int i = 0; i < 4; i++)
     {
         fgets(imsi, 100, rfp);
         len = strlen(imsi);
-        A[i] = (char*)malloc(sizeof(char) * len + 1);
+        A[i] = (char *)malloc(sizeof(char) * len + 1);
         strcpy(A[i], imsi);
 
         for (int j = 0; j < len; j++)
@@ -36,7 +44,7 @@ void main()
                 break;
             if (A[i][j] == '|' || A[i][j] == '\n')
             {
-                B[each] = (char*)malloc(sizeof(char) * tmp + 1);
+                B[each] = (char *)malloc(sizeof(char) * tmp + 1);
                 strcpy(B[each], dan);
                 for (int k = 0; k < tmp; k++)
                     dan[k] = '\0';
@@ -69,10 +77,12 @@ void main()
     fclose(wfp2);
 }
 
-void sort_Ascending(char** B)
+void sort_Ascending(char **B)
 {
     int k;
-    char tmp[20] = { NULL, };
+    char tmp[20] = {
+        NULL,
+    };
     for (int i = 0; i < 19; i++)
     {
         k = i + 1;
@@ -87,10 +97,12 @@ void sort_Ascending(char** B)
         }
     }
 }
-void sort_Descending(char** B)
+void sort_Descending(char **B)
 {
     int k;
-    char tmp[20] = { NULL, };
+    char tmp[20] = {
+        NULL,
+    };
     for (int i = 0; i < 19; i++)
     {
         k = i + 1;
@@ -105,14 +117,14 @@ void sort_Descending(char** B)
         }
     }
 }
-void write_result_to_file(char** B, FILE* wfp)
+void write_result_to_file(char **B, FILE *wfp)
 {
     fprintf(wfp, "========sorting Result========\n");
     for (int i = 0; i < 19; i++)
         fprintf(wfp, "[%20s]\n", B[i]);
 }
 
-void print_arr(char* arr[20])
+void print_arr(char *arr[20])
 {
     printf("========sorting Result========\n");
     for (int i = 0; i < 19; i++)

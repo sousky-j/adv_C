@@ -3,23 +3,23 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#pragma warning (disable: 6031)
+#pragma warning(disable : 6031)
 
 void main()
 {
 	char imsi[50];
-	char* a[3];
-	FILE* wfp;
+	char *a[3];
+	FILE *wfp;
 	int i, j;
-	int r=0;
-	wfp = fopen("C:\\Users\\hojun\\OneDrive\\¹ÙÅÁ È­¸é\\»õ Æú´õ\\output1.txt", "w");
+	int r = 0;
+	wfp = fopen("C:\\Users\\output1.txt", "w");
 
 	for (i = 0; i < 3; i++)
 	{
-		printf("%d ¹øÂ° ¹®ÀÚ¿­: ", i + 1);
+		printf("%d ï¿½ï¿½Â° ï¿½ï¿½ï¿½Ú¿ï¿½: ", i + 1);
 		gets(imsi);
 		r = strlen(imsi);
-		a[i] = (char*)malloc(sizeof(char) * r + 1);
+		a[i] = (char *)malloc(sizeof(char) * r + 1);
 		for (j = 0; j < r; j++)
 			a[i][r - j - 1] = imsi[j];
 		a[i][r] = '\0';
@@ -27,11 +27,11 @@ void main()
 	for (i = 0; i < 3; i++)
 	{
 		printf("%d : %s\n", i + 1, a[i]);
-		fputs(a[i],wfp);
+		fputs(a[i], wfp);
 		fputs("\n", wfp);
 	}
 
-	for(i=0;i<3;i++)
-	free(a[i]);
+	for (i = 0; i < 3; i++)
+		free(a[i]);
 	fclose(wfp);
 }
