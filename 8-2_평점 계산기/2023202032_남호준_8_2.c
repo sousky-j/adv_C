@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
@@ -10,9 +10,7 @@ void main()
 	float score[9]; // ����
 	char user[7][300];
 	float user_jum[7];
-	char cclass[7][300] = {
-		0,
-	};									  // �����
+	char cclass[7][300] = {0,	};	  // �����
 	int grade[7] = {3, 3, 3, 3, 2, 3, 1}; // �̼� ����
 	int len;
 	float total_score = 0, total_grade = 0;
