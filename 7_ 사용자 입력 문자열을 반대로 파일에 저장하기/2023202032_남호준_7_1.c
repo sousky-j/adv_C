@@ -12,7 +12,7 @@ void main()
 	FILE *wfp;
 	int i, j;
 	int r = 0;
-	wfp = fopen("C:\\Users\\output1.txt", "w");
+	wfp = fopen("output1.txt", "w");
 
 	for (i = 0; i < 3; i++)
 	{

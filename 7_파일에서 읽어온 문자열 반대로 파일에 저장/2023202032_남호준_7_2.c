@@ -12,8 +12,8 @@ void main()
 	char read[20];
 	char *write[4];
 	int i, j, r;
-	rfp = fopen("C:\\Users\\in.txt", "r");
-	wfp = fopen("C:\\Users\\output2.txt", "w");
+	rfp = fopen("in.txt", "r");
+	wfp = fopen("output2.txt", "w");
 
 	for (i = 0; i < 4; i++)
 	{

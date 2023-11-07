@@ -27,9 +27,9 @@ void main()
         NULL,
     };
     int len, each = 0, tmp = 0;
-    rfp = fopen("C:\\Users\\data.txt", "r");
-    wfp = fopen("C:\\Users\\output3.txt", "w");
-    wfp2 = fopen("C:\\Users\\output4.txt", "w");
+    rfp = fopen("data.txt", "r");
+    wfp = fopen("output3.txt", "w");
+    wfp2 = fopen("output4.txt", "w");
 
     for (int i = 0; i < 4; i++)
     {
