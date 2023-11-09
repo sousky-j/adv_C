@@ -2,40 +2,45 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#pragma warning (disable: 6031)
+#pragma warning(disable : 6031)
 
-void make_dictionary(char** B,int line);
-my_strcmp(char** B,int i);
+void make_dictionary(char **B, int line);
+my_strcmp(char **B, int i);
 
 void main()
 {
-    FILE* rfp;
-    FILE* wfp;
-    char imsi[100] = { NULL, };
-    char* A[8] = { NULL, };
-    char** B = NULL;
-    char dan[20] = { NULL, };
-    int len=0, each = 0, tmp = 0, i = 0;
-    int ch = 1,line=1;
+    FILE *rfp;
+    FILE *wfp;
+    char imsi[100] = {
+        NULL,
+    };
+    char *A[8] = {
+        NULL,
+    };
+    char **B = NULL;
+    char dan[20] = {
+        NULL,
+    };
+    int len = 0, each = 0, tmp = 0, i = 0;
+    int ch = 1, line = 1;
     int overlap = 0;
-    rfp = fopen("C:\\Users\\hojun\\OneDrive\\바탕 화면\\파일 입출력 파일\\words.txt", "r");
-    wfp = fopen("C:\\Users\\hojun\\OneDrive\\바탕 화면\\파일 입출력 파일\\dictionary.txt", "w");
+    rfp = fopen("words.txt", "r");
+    wfp = fopen("dictionary.txt", "w");
 
-
-    B = (char**)malloc(sizeof(char*) * line);
+    B = (char **)malloc(sizeof(char *) * line);
     B = NULL;
     while (!feof(rfp))
     {
         fgets(imsi, 100, rfp);
         len = strlen(imsi);
-        A[i] = (char*)malloc(sizeof(char) * len + 1);
+        A[i] = (char *)malloc(sizeof(char) * len + 1);
         strcpy(A[i], imsi);
 
         for (int j = 0; j < len; j++)
         {
             if (ch == 1)
             {
-                B = (char**)realloc(B, sizeof(char*) * line);
+                B = (char **)realloc(B, sizeof(char *) * line);
                 ch = 0;
             }
 
@@ -48,7 +53,7 @@ void main()
                     continue;
                 }
                 ch = 1;
-                *(B + each) = (char*)malloc(sizeof(char) * tmp + 1);
+                *(B + each) = (char *)malloc(sizeof(char) * tmp + 1);
                 strcpy(*(B + each), dan);
                 for (int k = 0; k < tmp; k++)
                     dan[k] = '\0';
@@ -69,8 +74,8 @@ void main()
                 }
 
                 ch = 1;
-                *(B+each) = (char*)malloc(sizeof(char) * tmp + 1);
-                strcpy(*(B+each), dan);
+                *(B + each) = (char *)malloc(sizeof(char) * tmp + 1);
+                strcpy(*(B + each), dan);
                 for (int k = 0; k < tmp; k++)
                     dan[k] = '\0';
                 each++;
@@ -82,7 +87,7 @@ void main()
             {
                 dan[tmp] = A[i][j];
                 tmp++;
-                overlap=0;
+                overlap = 0;
             }
         }
         i++;
@@ -96,10 +101,12 @@ void main()
     fclose(wfp);
 }
 
-void make_dictionary(char** B,int line)
+void make_dictionary(char **B, int line)
 {
     int k;
-    char tmp[20] = { NULL, };
+    char tmp[20] = {
+        NULL,
+    };
     for (int i = 0; i < line; i++)
     {
         k = i + 1;
@@ -114,15 +121,14 @@ void make_dictionary(char** B,int line)
             }
         }
     }
-
 }
 
-my_strcmp(char** B,int i)
+my_strcmp(char **B, int i)
 {
-/*    for (i; i < sizeof(B); i++)
-    {
-        if (B[i][j] > 64 && B[i][j] < 91)
-            B[i][j] += 32;
-    }
-*/
+    /*    for (i; i < sizeof(B); i++)
+        {
+            if (B[i][j] > 64 && B[i][j] < 91)
+                B[i][j] += 32;
+        }
+    */
 }
