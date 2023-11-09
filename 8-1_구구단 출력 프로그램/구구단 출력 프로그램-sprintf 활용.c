@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
+void main()
 {
     int a;
     printf("출력하고 싶은 단 수를 입력: ");
@@ -14,7 +14,6 @@ int main()
     FILE* wfp = fopen(file_name, "w");
     if (wfp == NULL) {
         perror("파일 열기 실패");
-        return 1;
     }
 
     for (int i = 1; i <= 9; i++) {
@@ -23,5 +22,4 @@ int main()
     }
 
     fclose(wfp);
-    return 0;
 }
