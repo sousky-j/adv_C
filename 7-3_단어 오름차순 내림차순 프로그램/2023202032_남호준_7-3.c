@@ -14,18 +14,10 @@ void main()
     FILE *rfp;
     FILE *wfp;
     FILE *wfp2;
-    char imsi[100] = {
-        NULL,
-    };
-    char *A[4] = {
-        NULL,
-    };
-    char *B[20] = {
-        NULL,
-    };
-    char dan[20] = {
-        NULL,
-    };
+    char imsi[100] = { NULL, };
+    char* A[4] = { NULL, };
+    char* B[19] = { NULL, };
+    char dan[20] = { NULL, };
     int len, each = 0, tmp = 0;
     rfp = fopen("data.txt", "r");
     wfp = fopen("output3.txt", "w");
@@ -80,9 +72,7 @@ void main()
 void sort_Ascending(char **B)
 {
     int k;
-    char tmp[20] = {
-        NULL,
-    };
+    char tmp[20] = { NULL, };
     for (int i = 0; i < 19; i++)
     {
         k = i + 1;
@@ -100,9 +90,7 @@ void sort_Ascending(char **B)
 void sort_Descending(char **B)
 {
     int k;
-    char tmp[20] = {
-        NULL,
-    };
+    char tmp[20] = { NULL, };
     for (int i = 0; i < 19; i++)
     {
         k = i + 1;
