@@ -6,7 +6,7 @@
 
 void main()
 {
-	char **p;
+	char** p;
 	char imsi[100] = { 0, };
 	int i, j, hap = 0;
 	int cnt, size, len = 0;
