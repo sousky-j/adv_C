@@ -16,7 +16,7 @@ void main()
 
 	for (i = 0; i < 3; i++)
 	{
-		printf("%d ��° ���ڿ�: ", i + 1);
+		printf("%d 번째 문자열: ", i + 1);
 		gets(imsi);
 		r = strlen(imsi);
 		a[i] = (char *)malloc(sizeof(char) * r + 1);
