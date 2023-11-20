@@ -29,13 +29,11 @@ void main()
 		p[i - 1] = data;
 		cnt++;
 	}
-
 	for (i = 0; i < cnt; i++)
 	{
 		if((p[i]%2)==0)
 			hap += p[i];
 	}
 	printf("입력 숫자 짝수합: %d", hap);
-
 	free(p);
 }
