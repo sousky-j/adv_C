@@ -19,7 +19,7 @@ void main()
 		if (p == 0)
 			break;
 
-		printf("%d번쨰 숫자:", i);
+		printf("%dth number:", i);
 		scanf("%d", &data);
 
 		if (data != 0)
@@ -34,6 +34,6 @@ void main()
 		if((p[i]%2)==0)
 			hap += p[i];
 	}
-	printf("입력 숫자 짝수합: %d", hap);
+	printf("total : %d", hap);
 	free(p);
 }
