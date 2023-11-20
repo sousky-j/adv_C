@@ -2,20 +2,20 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
-#pragma warning (disable: 6031)
+#pragma warning(disable : 6031)
 
 void main()
 {
-	char* p[2];
+	char *p[2];
 	char imsi[100];
 	int i, size;
 
-	printf("¹®ÀÚ¿­ ÀÔ·Â: ");
+	printf("ë¬¸ìì—´ ì…ë ¥: ");
 	gets(imsi);
 	size = strlen(imsi);
 	for (i = 0; i < 2; i++)
 	{
-		p[i] = (char*)malloc((sizeof(char) * size) + 1);
+		p[i] = (char *)malloc((sizeof(char) * size) + 1);
 		strcpy(p[i], imsi);
 	}
 	for (int j = 0; j < size; j++)
