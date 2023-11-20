@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+﻿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <malloc.h>
 #pragma warning (disable: 6031)
@@ -10,7 +10,7 @@ void main()
 	int data;
 
 	p = (int*)malloc(sizeof(int) * 1);
-	printf("1��° ����: ");
+	printf("1번째 숫자: ");
 	scanf("%d", p);
 	cnt++;
 
@@ -19,7 +19,7 @@ void main()
 		if (p == 0)
 			break;
 
-		printf("%dth number:", i);
+		printf("%번째 숫자:", i);
 		scanf("%d", &data);
 
 		if (data != 0)
@@ -34,6 +34,6 @@ void main()
 		if((p[i]%2)==0)
 			hap += p[i];
 	}
-	printf("total : %d", hap);
+	printf("입력한 짝수의 합: %d", hap);
 	free(p);
 }
