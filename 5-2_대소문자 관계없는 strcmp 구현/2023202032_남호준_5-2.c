@@ -1,9 +1,10 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
 #pragma warning (disable: 6031)
 
+void my_strcmp(char* p[2]);
 
 void main()
 {
@@ -13,7 +14,7 @@ void main()
 
 	for (i = 0; i < 2; i++)
 	{
-		printf("%d¹øÂ° ¹®ÀÚ¿­ ÀÔ·Â: ", i + 1);
+		printf("%dë²ˆì§¸ ë¬¸ìžì—´ ìž…ë ¥: ", i + 1);
 		scanf("%s", imsi);
 		size = strlen(imsi);
 		p[i] = (char*)malloc((sizeof(char) * size) + 1);
@@ -26,7 +27,8 @@ void main()
 	}
 	my_strcmp(p);
 
-	free(p);
+	free(p[0]);
+	free(p[1]);
 }
 
 void my_strcmp(char* p[2])
