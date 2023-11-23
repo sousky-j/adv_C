@@ -8,7 +8,7 @@ void main()
 {
 	int a, b, len = 1;
 	char *arr;
-	printf("ë³€í™˜ ìˆ˜ ìž…ë ¥:");
+	printf("º¯È¯ ¼ö ÀÔ·Â:");
 	scanf("%d", &a);
 
 	b = (a - a % 100) / 100;
