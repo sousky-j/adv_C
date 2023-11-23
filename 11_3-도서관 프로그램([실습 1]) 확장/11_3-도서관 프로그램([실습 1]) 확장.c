@@ -11,47 +11,60 @@ struct book
 	char name[50];//도서 제목
 };
 struct book b[21];//도서관
+struct book sto[99];//창고
 
 struct borrow
 {
 	int id;
 	char name[50];
 };
-struct storage
-{
-	int id;
-	int odd;
-	char name[50];
-};
-struct storage s[99];
 
 int initial_booklist();
-void manage_booklist(struct borrow* p, struct book b[21], int id, int* bilin);
+void manage_booklist(struct borrow** p, struct book b[21], int id, int* bilin);
 int admin_check(char* argv1, char* argv2);
 void print_booklist();
-void storage();
+int storage();
 int admin();
-void main(int argc, char* argv[])
+
+void main()
 {
+	char adid[20];
+	char adpw[20];
 	int id;//id 입력
 	int bil = 0;//빌린 권수
 	struct borrow* p;//대여 도서
 	p = (struct borrow*)malloc(sizeof(struct borrow));// realloc 위한 malloc
 	if (initial_booklist() != 0) return;	//도서관 도서 초기화
 
-	if (admin_check(argv[1], argv[2]) == 1)
+	printf("관리자 모드에 진입하려면 아이디와 비번을 입력하세요 :");
+	scanf("%s %s", adid, adpw);
+
+	if (admin_check(adid, adpw) == 1)
 	{
 		if (admin() != 1) return;
 	}
+
 	while (1)
 	{
 		print_booklist();
 		scanf("%d", &id);
-		if (id == 0)	break;
-		else if (id < 1 || id > 21) { printf("보유하지 않은 도서입니다. 돌아갑니다.\n\n"); continue; }
-		else if(id==9999) 
-		p = (struct borrow*)realloc(p, sizeof(struct borrow) * (bil + 1));
-		manage_booklist(p, b, id, &bil);
+		if (id == 0)
+			break;
+		else if (id == 9999)
+		{
+			printf("관리자의 아이디와 비밀번호를 입력하세요:");
+			scanf("%s %s", adid, adpw);
+			if (admin_check(adid, adpw) == 1) if (admin() != 1) return;
+			else
+				printf("아이디나 비밀번호가 틀렸습니다.\n");
+			continue;
+		}
+		else if (id < 1 || id > 21)
+		{
+			printf("보유하지 않은 도서입니다. 돌아갑니다.\n\n");
+			continue;
+		}
+		manage_booklist(&p, b, id, &bil);
 
 		printf("=========== Borrowed Book List ===========\n");
 		for (int i = 0; i < bil; i++)
@@ -80,7 +93,7 @@ int initial_booklist()
 	return 0;
 }
 
-void manage_booklist(struct borrow* p, struct book b[21], int id, int* bil)
+void manage_booklist(struct borrow** p, struct book b[21], int id, int* bil)
 {
 	id--;
 	if (b[id].odd == 0)
@@ -88,10 +101,10 @@ void manage_booklist(struct borrow* p, struct book b[21], int id, int* bil)
 	else
 	{
 		*bil += 1;
-		p = (struct borrow*)realloc(p, sizeof(struct borrow) * (*bil));
+		*p = (struct borrow*)realloc(*p, sizeof(struct borrow) * (*bil));
 		b[id].odd -= 1;
-		p[*bil - 1].id = id + 1;
-		strcpy(p[*bil - 1].name, b[id].name);
+		(*p)[*bil - 1].id = id + 1;
+		strcpy((*p)[*bil - 1].name, b[id].name);
 		printf("Borrow a Book.\n");
 	}
 }
@@ -108,7 +121,7 @@ int admin_check(char* argv1, char* argv2)
 		return 0;
 	}
 	fscanf(rfp, "%s  %s", trash, id);
-	fscanf(rfp, "%s %s", trash, pw);
+	fscanf(rfp, "%s  %s", trash, pw);
 	fclose(rfp);
 	if ((strcmp(argv1, id) == 0) && (strcmp(argv2, pw) == 0)) return 1;
 	else return 0;
@@ -123,22 +136,6 @@ void print_booklist()
 	printf("Type the book id to borrow(0 to end) : ");
 }
 
-void storage()
-{
-	FILE* rfp = fopen("storage.txt", "r");
-	char trash[50];
-	fgets(rfp, 50, trash);
-	for (int i = 0; i < 99; i++)
-	{
-		fscanf("%s %d", s[i].name, s[i].odd);
-		s[i].id = i + 1;
-	}
-	fclose(rfp);
-	for (int i = 0; i < 21; i++)
-	{
-	}
-}
-
 int admin()
 {
 	int tran;//서비스 모드 전환 입력변수
@@ -148,9 +145,92 @@ int admin()
 	for (int i = 0; i < 21; i++)
 		printf("%2d : %35s %d\n", b[i].id, b[i].name, b[i].odd);
 	printf("===============================\n");
-	storage();
+	printf("진열대에 비어있는 도서를 채울까요?\n");
+	printf("YES: 1\t\tNO: 나머지 수 ==>");
+	int doseo;
+	scanf("%d", &doseo);
+	if (doseo == 1) {
+		
+		if (storage() == 1)
+			printf("책을 채웠습니다.\n");
+		else
+			printf("책 채우기 실패\n");
+	}
 	printf("서비스 모드로 전환은 1 (또는 종료: 나머지 수): ");
 	scanf("%d", &tran);
-	if (tran != 1) return 1;
+	if (tran == 1) return 1;
 	else return 0;
+}
+
+int storage()
+{
+	FILE* rfp = fopen("storage.txt", "r");
+	if (rfp == NULL)
+	{
+		printf("파일 호출 실패\n");
+		return 0;
+	}
+	char imsi[100];
+	fgets(imsi, 100, rfp);
+	for (int i = 0; i < 99; i++)
+	{
+		fgets(imsi, 100, rfp);
+		int len = strlen(imsi);
+		int overlapping = 0;
+		for (int i = 0; i < len; i++)
+		{
+			if (imsi[i] == ' ')
+			{
+				/
+				/
+				/
+					
+					
+					
+					
+					
+				/
+
+					/
+				/
+				/
+				/
+				/
+				/
+
+			}
+		}
+		printf("%s %d\n", sto[i].name, sto[i].odd);
+	}
+	fclose(rfp);
+
+	int j = 0;
+	for (int i = 0; i < 21; i++)
+	{
+		if (b[i].odd == 0)
+		{
+			while (1)
+			{
+				if (j == 100)
+				{
+					break;
+				}
+				if (strcmp(b[i].name, sto[j].name) == 0)
+				{
+					for (int p = 0; p < 3; p++)
+					{
+						if (b[i].odd < 3 && sto[j].odd>0)
+						{
+							b[i].odd++;
+							sto[j].odd--;
+						}
+					}
+					break;
+				}
+				j++;
+			}
+			j = 0;
+		}
+	}
+	return 1;
 }
