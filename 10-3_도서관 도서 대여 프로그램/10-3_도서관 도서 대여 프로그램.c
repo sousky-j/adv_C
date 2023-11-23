@@ -47,6 +47,7 @@ void main()
 			printf("%d : %s\n", p[i].id, p[i].name);
 		printf("===========================================\n");
 	}
+	free(p);
 }
 
 void manage_booklist(struct borrow* p, struct book b[21], int id, int* bilin)

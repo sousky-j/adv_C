@@ -6,8 +6,14 @@
 #include <time.h>
 #pragma warning (disable: 6031)
 
-void shuffle(char* p, int* a);
-void main()
+void shuffle();//카드 20장 만드는 함수 (malloc, random 사용)
+void initialization();//카드를 2장씩 유저-딜러 순으로 분배하는 함수 ex) 유저-딜러-유저-딜러 (malloc 사용)
+void status();//현재 카드 상황을 출력하는 함수
+void hit();//카드를 1장씩 유저에게 주는 함수 (realloc 사용)
+void end();//딜러가 규칙에 따라 16점 이하일 경우 계속 카드를 받고, 17점 이상일 시 더이상 카드를 받지 않게 만드는 함수
+void result();//유저의 승리 및 패배를 검토하는 함수 (free를 통한 메모리 해제)
+
+void main()//코드 내 조건문 처리(게임 시작)
 {
 	int i=0;
 	char check[30];
