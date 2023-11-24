@@ -51,12 +51,14 @@ void Initial_menulist()
 
 	for (int i = 0; i < 5; i++)
 	{
-		ca.drink->id = i + 1;
-		ca.dessert->id = i + 1;
-		fscanf(rfp1, "%s %f", ca.drink->name, &ca.drink->price);
-		fscanf(rfp2, "%s %f", ca.dessert->name, &ca.dessert->price);
-		strcpy(ca.order_des->name, ca.dessert->name);
-		strcpy(ca.order_dri->name, ca.drink->name);
+		ca.drink[i].id = i + 1;
+		ca.dessert[i].id = i + 1;
+		ca.order_dri->id = i + 6;
+		ca.order_des->id = i + 6;
+		fscanf(rfp1, "%s %f", ca.drink[i].name, &ca.drink[i].price);
+		fscanf(rfp2, "%s %f", ca.dessert[i].name, &ca.dessert[i].price);
+		strcpy(ca.order_des[i].name, ca.dessert[i].name);
+		strcpy(ca.order_dri[i].name, ca.drink[i].name);
 	}
 	fclose(rfp1);
 	fclose(rfp2);
@@ -68,9 +70,13 @@ void drink_count()
 	printf("주문하실 음료를 선택하세요\n\n\n");
 	printf("drink menues\n");
 	for (int i = 0; i < 5; i++)
-		printf("[%d] %20s %.2f\n", ca.drink->id, ca.drink->name, ca.drink->price);
+		printf("[%d] %20s %.2f\n", ca.drink[i].id, ca.drink[i].name, ca.drink[i].price);
 	scanf("%d", &menu);
-	ca.order_dri[menu].id++;
+	if (menu >= 1 && menu <= 5)
+	{
+		ca.order_dri[menu].id++;
+
+	}
 }
 
 void dessert_count()
