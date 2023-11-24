@@ -6,7 +6,7 @@
 #pragma warning(disable : 6031)
 
 void make_dictionary(char** a, int cnt);//sorting func
-int my_strcmp(const char* a, const char* b);//, char* p, char* q);//strcmp func: case sensitive regardless
+int my_strcmp(const char* a, const char* b, char* p, char* q);//strcmp func: case sensitive regardless
 
 void main()
 {
@@ -67,9 +67,9 @@ void main()
 }
 
 void make_dictionary(char** a, int cnt)
-{/*
+{
 	char* p=NULL;
-	char* q=NULL;*/
+	char* q=NULL;
 	int c = 0, j;
 	char tmp[20] = { NULL };
 
@@ -78,7 +78,7 @@ void make_dictionary(char** a, int cnt)
 		for (int k = i + 1; k < cnt; k++)
 		{
 			j = i;
-			c = my_strcmp(a[i], a[k]);// ,p, q);
+			c = my_strcmp(a[i], a[k], p, q);
 			if (c > 0)
 			{
 				j = k;
@@ -92,10 +92,10 @@ void make_dictionary(char** a, int cnt)
 
 }
 
-int my_strcmp(const char* a, const char* b)//, char* p, char* q)
+int my_strcmp(const char* a, const char* b, char* p, char* q)
 {
-	char *p = (char*)malloc(sizeof(char) * (strlen(a) + 1));
-	char *q = (char*)malloc(sizeof(char) * (strlen(b) + 1));
+	p = (char*)malloc(sizeof(char) * (strlen(a) + 1));
+	q = (char*)malloc(sizeof(char) * (strlen(b) + 1));
 	strcpy(p, a);
 	strcpy(q, b);
 
@@ -111,9 +111,6 @@ int my_strcmp(const char* a, const char* b)//, char* p, char* q)
 	}
 
 	int v = strcmp(p, q);
-
-	free(p);
-	free(q);
 
 	return v;
 }

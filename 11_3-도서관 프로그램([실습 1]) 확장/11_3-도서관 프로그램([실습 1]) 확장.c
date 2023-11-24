@@ -20,10 +20,11 @@ struct borrow
 };
 
 int initial_booklist();
+int initial_storage();
 void manage_booklist(struct borrow** p, struct book b[21], int id, int* bilin);
 int admin_check(char* argv1, char* argv2);
 void print_booklist();
-int storage();
+void fill_to_storage();
 int admin();
 
 void main()
@@ -35,7 +36,7 @@ void main()
 	struct borrow* p;//대여 도서
 	p = (struct borrow*)malloc(sizeof(struct borrow));// realloc 위한 malloc
 	if (initial_booklist() != 0) return;	//도서관 도서 초기화
-
+	if (initial_storage() != 0) return;
 	printf("관리자 모드에 진입하려면 아이디와 비번을 입력하세요 :");
 	scanf("%s %s", adid, adpw);
 
@@ -54,7 +55,11 @@ void main()
 		{
 			printf("관리자의 아이디와 비밀번호를 입력하세요:");
 			scanf("%s %s", adid, adpw);
-			if (admin_check(adid, adpw) == 1) if (admin() != 1) return;
+			if (admin_check(adid, adpw) == 1)
+			{
+				if (admin() != 1)
+					return;
+			}
 			else
 				printf("아이디나 비밀번호가 틀렸습니다.\n");
 			continue;
@@ -149,12 +154,10 @@ int admin()
 	printf("YES: 1\t\tNO: 나머지 수 ==>");
 	int doseo;
 	scanf("%d", &doseo);
-	if (doseo == 1) {
-		
-		if (storage() == 1)
-			printf("책을 채웠습니다.\n");
-		else
-			printf("책 채우기 실패\n");
+	if (doseo == 1)
+	{
+		fill_to_storage();
+		printf("책을 채웠습니다.\n");
 	}
 	printf("서비스 모드로 전환은 1 (또는 종료: 나머지 수): ");
 	scanf("%d", &tran);
@@ -162,13 +165,14 @@ int admin()
 	else return 0;
 }
 
-int storage()
+int initial_storage()
 {
+
 	FILE* rfp = fopen("storage.txt", "r");
 	if (rfp == NULL)
 	{
 		printf("파일 호출 실패\n");
-		return 0;
+		return 1;
 	}
 	char imsi[100];
 	fgets(imsi, 100, rfp);
@@ -176,38 +180,20 @@ int storage()
 	{
 		fgets(imsi, 100, rfp);
 		int len = strlen(imsi);
-		int overlapping = 0;
-		for (int i = 0; i < len; i++)
-		{
-			if (imsi[i] == ' ')
-			{
-				/
-				/
-				/
-					
-					
-					
-					
-					
-				/
-
-					/
-				/
-				/
-				/
-				/
-				/
-
-			}
-		}
-		printf("%s %d\n", sto[i].name, sto[i].odd);
+		imsi[len - 5] = '\0';
+		strcpy(sto[i].name, imsi);
+		sto[i].odd = 100;
 	}
 	fclose(rfp);
+	return 0;
+}
 
+void fill_to_storage()
+{
 	int j = 0;
 	for (int i = 0; i < 21; i++)
 	{
-		if (b[i].odd == 0)
+		if (b[i].odd != 3)
 		{
 			while (1)
 			{
@@ -232,5 +218,6 @@ int storage()
 			j = 0;
 		}
 	}
-	return 1;
+	for (int i = 0; i < 99; i++)
+		printf("%35s %3d\n", sto[i].name, sto[i].odd);
 }
