@@ -79,14 +79,11 @@ void make_dictionary(char** a, int cnt)
 		{
 			j = i;
 			c = my_strcmp(a[i], a[k], p, q);
-			if (c > 0)
-			{
+			if (c == 1)
 				j = k;
-			}
 			strcpy(tmp, *(a + i));
 			strcpy(*(a + i), *(a + j));
 			strcpy(*(a + j), tmp);
-
 		}
 	}
 

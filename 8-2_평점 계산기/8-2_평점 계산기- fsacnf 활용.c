@@ -20,10 +20,7 @@ void main()
 	fscanf(rfp, "%s\t\t%s\t%s\n", waste, waste, waste);
 	for (int i = 0; i < 7; i++)
 	{
-		if (i == 1 || i == 4)
-			fscanf(rfp, "%s\t\t%d\t%s", sub_name[i], hakjum + i, sungjuk[i]);
-		else
-			fscanf(rfp, "%s\t%d\t%s", sub_name[i], hakjum + i, sungjuk[i]);
+		fscanf(rfp, "%s\t%d\t%s", sub_name[i], hakjum + i, sungjuk[i]);
 
 		if (strcmp(sungjuk[i], "A+") == 0)
 			score[i] = std_score[0];
