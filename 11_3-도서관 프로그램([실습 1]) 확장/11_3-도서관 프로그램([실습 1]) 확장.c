@@ -26,6 +26,7 @@ int admin_check(char* argv1, char* argv2);
 void print_booklist();
 void fill_to_storage();
 int admin();
+void print_storage();
 
 void main()
 {
@@ -167,7 +168,6 @@ int admin()
 
 int initial_storage()
 {
-
 	FILE* rfp = fopen("storage.txt", "r");
 	if (rfp == NULL)
 	{
@@ -197,10 +197,7 @@ void fill_to_storage()
 		{
 			while (1)
 			{
-				if (j == 100)
-				{
-					break;
-				}
+				if (j == 100) break;
 				if (strcmp(b[i].name, sto[j].name) == 0)
 				{
 					for (int p = 0; p < 3; p++)
@@ -220,4 +217,14 @@ void fill_to_storage()
 	}
 	for (int i = 0; i < 99; i++)
 		printf("%35s %3d\n", sto[i].name, sto[i].odd);
+	print_storage();
+}
+
+void print_storage()
+{
+	FILE* wfp = fopen("storage.txt", "w");
+	fprintf(wfp, "book_name count\n");
+	for (int i = 0; i < 99; i++)
+		fprintf(wfp, "%s %d\n", sto[i].name, sto[i].odd);
+	fclose(wfp);
 }
